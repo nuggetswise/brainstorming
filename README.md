@@ -1,14 +1,77 @@
-# Claude Mail - Product Research & Planning
+# Mission-Driven Open Source Projects
+
+**Building Free Alternatives to Expensive SaaS Tools for PMs & AI Enthusiasts**
+
+> Democratizing access to powerful tools through open-source, AI-powered solutions that save teams $10,000-20,000/year.
+
+---
+
+## 📚 Repository Overview
+
+This repository contains research and planning for **mission-driven open-source projects** targeting Product Managers and AI Enthusiasts. Our goal: replace expensive commercial tools with free, transparent, community-driven alternatives.
+
+### 🎯 Featured Projects
+
+1. **[Claude Mail](./README.md#claude-mail-project-1)** - AI-powered B2B email campaigns (research complete ✅)
+2. **[8+ Additional Projects](./MISSION_DRIVEN_PROJECTS.md)** - Covering PM tools, AI platforms, analytics, and more
+
+### 📋 Quick Navigation
+
+| Document | Description | Audience |
+|----------|-------------|----------|
+| **[MISSION_DRIVEN_PROJECTS.md](MISSION_DRIVEN_PROJECTS.md)** | Complete portfolio of 8 project ideas | All stakeholders |
+| **Claude Mail Deep Dive** ↓ | Detailed research on Project #1 | Product, Engineering |
+
+---
+
+## 🚀 Current Project Portfolio
+
+### Estimated Total Savings: $16,327/year per 10-person team
+
+**For Product Managers:**
+- **MemoryBoard** - Linear/Jira alternative with AI memory
+- **DocFlow** - Notion/Confluence alternative with AI assistance
+- **OpenMetrics** - Mixpanel/Amplitude alternative (self-hosted)
+
+**For AI Enthusiasts:**
+- **LLMHub** - AI model router & cost optimizer (50-80% savings)
+- **PromptVault** - Git-like prompt management & versioning
+- **LocalLLM Studio** - Beautiful GUI for local AI models
+
+**Cross-Functional:**
+- **ClaudeWorkflow** - Retool alternative with AI code generation
+- **Claude Mail** - Email personalization platform (detailed below)
+
+👉 **See [MISSION_DRIVEN_PROJECTS.md](MISSION_DRIVEN_PROJECTS.md) for full details**
+
+---
+
+## 🔧 Claude Code Features Demonstrated
+
+This repository showcases advanced Claude Code capabilities:
+
+✅ **Custom Slash Commands** (in `.claude/commands/`)
+- `/analyze-project` - Deep project analysis
+- `/customer-discovery` - Generate interview questions
+- `/mvp-spec` - Create detailed specifications
+- `/market-research` - Conduct market research
+- `/compare-projects` - Compare and prioritize projects
+
+✅ **Sub-agents** - Used for codebase exploration and research
+
+✅ **Configuration** - See `.claude/claude.md` for workflow setup
+
+---
+
+# Claude Mail (Project #1)
 
 **AI-Powered Campaign Orchestration System for B2B Outreach**
 
 > The only system that guarantees you'll never repeat yourself, always share valuable insights, and speak in your prospect's language—powered by Claude Sonnet 4.5.
 
----
+## 📚 Claude Mail Documentation
 
-## 📚 Documentation Overview
-
-This repository contains comprehensive product research for **Claude Mail**, an AI-powered email personalization and campaign orchestration system.
+This section contains comprehensive product research for **Claude Mail**, our first mission-driven project.
 
 ### Quick Start
 1. Read **[QUICK_SUMMARY.md](QUICK_SUMMARY.md)** (5 min) - Executive overview
