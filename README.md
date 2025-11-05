@@ -1,14 +1,135 @@
-# Claude Mail - Product Research & Planning
+# Mission-Driven Claude Code Extensions
+
+**Build Free Productivity Tools That Run in Claude Code - No Deployment Required!**
+
+> Democratizing access to powerful tools through Claude Code extensions that users install in 30 seconds and use with their Claude Pro subscription.
+
+---
+
+## 🎯 The Big Idea
+
+**Instead of building web apps that need deployment**, we build **Claude Code extensions** - just files users drop into their `.claude/` directory!
+
+### Why This Changes Everything:
+- ✅ **Zero deployment** - `git clone` and done
+- ✅ **No hosting costs** - Runs locally
+- ✅ **Built-in AI** - Uses Claude Pro subscription
+- ✅ **Instant distribution** - Share via GitHub
+- ✅ **Privacy-first** - All data stays local
+
+---
+
+## 📚 Repository Overview
+
+This repository contains research and planning for **Claude Code extensions** targeting Product Managers and AI Enthusiasts.
+
+### 🎯 What We're Building
+
+**8 Claude Code Extensions** to replace expensive SaaS tools:
+
+**For Product Managers:**
+- **AgileFlow** - Full project management (replaces Jira/Linear $86-96/user/year)
+- **KnowledgeKit** - Knowledge base with AI (replaces Notion/Confluence $77-144/user/year)
+- **MetricsFlow** - Product analytics (replaces Mixpanel/Amplitude $300-700/mo)
+
+**For AI Enthusiasts:**
+- **PromptForge** - Git for prompts with versioning & A/B testing 🔥
+- **TokenTracker** - AI usage cost monitoring & optimization
+- **ExperimentLab** - Experiment tracking (replaces Weights & Biases $50-200/user/mo)
+
+**Cross-Functional:**
+- **CampaignKit** - Email outreach (replaces Smartwriter $59/mo)
+- **ScriptGen** - Natural language → scripts (replaces Retool $50/user/mo)
+
+### 📋 Quick Navigation
+
+| Document | Description |
+|----------|-------------|
+| **[MISSION_DRIVEN_PROJECTS.md](MISSION_DRIVEN_PROJECTS.md)** | Complete specs for all 8 extensions |
+| **[examples/promptforge-demo/](examples/promptforge-demo/)** | Working demo - try it now! |
+| **Claude Mail Deep Dive** ↓ | Original research (being adapted) |
+
+---
+
+## 🚀 Demo: See It In Action
+
+We've built a **working demo** of PromptForge to show how easy this is:
+
+```bash
+cd examples/promptforge-demo
+claude /prompt-save    # Save your first prompt
+claude /prompt-list    # View your library
+claude /prompt-load code-review
+```
+
+**That's it!** No deployment, no configuration, just works.
+
+See [`examples/promptforge-demo/README.md`](examples/promptforge-demo/README.md) for details.
+
+---
+
+## 💡 Why Build Claude Code Extensions?
+
+### Traditional Approach (What We're NOT Doing):
+- Build React/Node.js app ❌
+- Deploy to Vercel/AWS ❌
+- Set up database ❌
+- Handle auth & billing ❌
+- Maintain servers ❌
+- **Cost:** $100-500/month ❌
+
+### Claude Code Extension Approach:
+- Write markdown files ✅
+- Users git clone ✅
+- Runs in Claude Code ✅
+- Data stays local ✅
+- Free forever ✅
+- **Cost:** $0 ✅
+
+---
+
+## 🎯 Current Project Portfolio
+
+### Target: Save users $4,000-6,000/year (vs commercial tools)
+
+**Recommended Build Order:**
+1. **PromptForge** (1-2 weeks) - Easiest, immediate value ⭐ **START HERE**
+2. **TokenTracker** (1 week) - Simple, practical utility
+3. **AgileFlow** (2-3 weeks) - High impact for PMs
+4. **CampaignKit** (3-4 weeks) - Leverage existing Claude Mail research
+
+👉 **See [MISSION_DRIVEN_PROJECTS.md](MISSION_DRIVEN_PROJECTS.md) for complete specs**
+
+---
+
+## 🔧 Claude Code Features Demonstrated
+
+This repository showcases advanced Claude Code capabilities:
+
+✅ **Custom Slash Commands** (in `.claude/commands/`)
+- `/analyze-project` - Deep project analysis
+- `/customer-discovery` - Generate interview questions
+- `/mvp-spec` - Create detailed specifications
+- `/market-research` - Conduct market research
+- `/compare-projects` - Compare and prioritize projects
+
+✅ **Working Demo** - See `examples/promptforge-demo/`
+
+✅ **Sub-agents** - Used for codebase exploration and research
+
+✅ **Configuration** - See `.claude/claude.md` for workflow setup
+
+---
+
+# Claude Mail (Project #1)
 
 **AI-Powered Campaign Orchestration System for B2B Outreach**
 
 > The only system that guarantees you'll never repeat yourself, always share valuable insights, and speak in your prospect's language—powered by Claude Sonnet 4.5.
 
----
+## 📚 Claude Mail Documentation
 
-## 📚 Documentation Overview
-
-This repository contains comprehensive product research for **Claude Mail**, an AI-powered email personalization and campaign orchestration system.
+This section contains comprehensive product research for **Claude Mail**, our first mission-driven project.
 
 ### Quick Start
 1. Read **[QUICK_SUMMARY.md](QUICK_SUMMARY.md)** (5 min) - Executive overview
