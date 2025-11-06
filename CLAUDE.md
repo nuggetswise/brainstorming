@@ -1,15 +1,16 @@
-# PromptForge: Claude Code Configuration
+# PromptForge: Best Practices Guide
 
-**Project:** PromptForge - Product Manager Prompt Library with AI Enhancement
-**Status:** Sprint 0 - Implementation Ready
-**Team:** Prompt Engineer + AI Engineer
-**Timeline:** 8.5 weeks (14-day Sprint 0 + 6-week implementation)
+**Purpose:** Guide AI and Prompt Engineers on coding standards, quality requirements, and best practices for building PromptForge
+
+**Audience:** Engineers working on PromptForge plugin development
+
+**Scope:** Technical standards, not project management
 
 ---
 
-## 📋 Project Overview
+## 📋 Project Context
 
-PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (PRIME 8.5+) with AI-powered enhancement that adapts prompts to user's industry, company stage, and team context.
+PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (PRIME 8.5+) with AI-powered enhancement.
 
 **Key Components:**
 - Plugin-based distribution (Claude Code marketplace or GitHub releases)
@@ -48,6 +49,12 @@ PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (PRIME 
    - No telemetry without explicit opt-in
    - User prompts never sent to external services
    - Document data handling in README
+
+5. **Conciseness in Prompts**
+   - Target 200-300 lines for conversational prompts
+   - Remove verbose examples and redundant explanations
+   - Focus on clarity over comprehensiveness
+   - One excellent example > multiple verbose examples
 
 ---
 
@@ -95,7 +102,7 @@ promptforge-plugin/
 ├── .claude-plugin/
 │   └── plugin.json              # MUST: Valid JSON, all components listed
 ├── skills/promptforge/
-│   └── SKILL.md                 # MUST: Auto-activation triggers defined
+│   └── SKILL.md                 # MUST: Concise (200-250 lines), auto-activation triggers
 ├── agents/
 │   ├── prompt-enhancer.md       # MUST: All 5 edge cases handled
 │   └── prompt-researcher.md     # MUST: All 5 edge cases handled
@@ -143,23 +150,6 @@ promptforge-plugin/
 - ✅ User customizations survive plugin updates
 - ✅ Users still receive official prompt updates
 - ✅ Clear separation of concerns
-- ✅ Users can mix custom + official prompts
-
-### Distribution Strategy
-
-**Primary: Claude Code Marketplace**
-- Official distribution channel
-- Auto-update capability
-- Follows aitmpl.com structure (400+ approved components)
-- Discovery through marketplace browsing
-
-**Fallback: GitHub Releases**
-- If marketplace rejects or delays approval
-- Users: `cd ~/.claude-code/plugins/ && git clone [repo] promptforge`
-- Manual updates via `git pull`
-- Still fully functional, just no auto-updates
-
-**Note:** aitmpl.com has 400+ approved components using same structure, so approval likely.
 
 ### Naming Conventions
 
@@ -176,7 +166,6 @@ promptforge-plugin/
 **Branch Names:**
 - MUST start with `claude/` and end with session ID
 - Format: `claude/descriptive-name-{sessionId}`
-- Example: `claude/review-product-plan-011CUr1GxHrvVy5WmuZEyQov`
 
 ---
 
@@ -187,16 +176,16 @@ promptforge-plugin/
 **MUST have:**
 - [ ] YAML frontmatter with all required fields
 - [ ] PRIME score ≥8.5 documented
-- [ ] At least 2 concrete examples
+- [ ] 1-2 concrete examples (not 3-4)
+- [ ] 200-300 lines total (conversational length)
 - [ ] Explicit audience and context
 - [ ] Defined output format and success criteria
 - [ ] Framework references (RICE, JTBD, OKRs, etc.)
-- [ ] Tips & common pitfalls section
-- [ ] Customization options described
+- [ ] Top 5 tips (not 10+)
+- [ ] Common pitfalls section (2-3 key ones)
 
 **SHOULD have:**
 - [ ] Related prompts linked
-- [ ] Multiple scenarios shown in examples
 - [ ] Step-by-step instructions
 - [ ] Visual formatting (tables, bullets, headers)
 
@@ -206,36 +195,39 @@ promptforge-plugin/
 - [ ] Unclear scope ("analyze data" without context)
 - [ ] Missing metadata fields
 - [ ] PRIME score <8.5
+- [ ] Verbose examples (700-1000 lines)
 
 ### For Skill/Agent Files
 
 **MUST have:**
 - [ ] Clear activation/invocation triggers
+- [ ] Concise (200-250 lines for Skills)
 - [ ] All edge cases handled gracefully
 - [ ] Fallback behavior defined
 - [ ] Error messages are user-friendly
-- [ ] Performance considerations documented
-- [ ] Example interactions shown
+- [ ] 1 brief example interaction (not 4 detailed ones)
 
 **SHOULD have:**
 - [ ] Progress indicators for long operations
 - [ ] Helpful suggestions when things go wrong
 - [ ] Context preservation strategies
-- [ ] Testing scenarios documented
+
+**MUST NOT have:**
+- [ ] Extensive example dialogs (Skills are behavior specs, not documentation)
+- [ ] Verbose style guides (keep concise)
+- [ ] Redundant explanations
 
 ### For Documentation
 
 **MUST have:**
 - [ ] Clear, concise language (8th grade reading level)
 - [ ] Code examples where applicable
-- [ ] Screenshots or diagrams (if helpful)
 - [ ] Up-to-date information
 - [ ] Consistent formatting
 
 **SHOULD have:**
 - [ ] Quick start section (2-5 min)
 - [ ] Troubleshooting guide
-- [ ] FAQ for common questions
 - [ ] Links to related docs
 
 ---
@@ -263,7 +255,6 @@ promptforge-plugin/
 - Provide clear, actionable user response
 - Offer 2-3 options (not just error message)
 - Include fallback to safe default
-- Log for debugging (if applicable)
 
 ---
 
@@ -277,6 +268,7 @@ promptforge-plugin/
 - [ ] Tested with real use case
 - [ ] Enhancement works (if P0/P1 prompt)
 - [ ] No spelling/grammar errors
+- [ ] Length check (200-300 lines target)
 
 **For Skills/Agents:**
 - [ ] Manual testing with 3+ scenarios
@@ -291,16 +283,6 @@ promptforge-plugin/
 - [ ] Integration with skills/agents works
 - [ ] Error messages are helpful
 
-### Sprint 0 Success Criteria
-
-- [ ] Plugin installs successfully (>95% success rate)
-- [ ] Skill auto-activates appropriately
-- [ ] Enhancement improves PRIME scores by +0.3 avg
-- [ ] Search finds relevant prompts (>80% accuracy)
-- [ ] All 10 edge cases handled gracefully
-- [ ] 3 prompts migrated and scored (PRIME ≥9.0)
-- [ ] Zero critical bugs
-
 ---
 
 ## 📝 Commit Message Format
@@ -314,8 +296,6 @@ promptforge-plugin/
 - Why it changed
 - Any breaking changes
 - Testing done
-
-<optional footer with issue references>
 ```
 
 ### Types
@@ -325,7 +305,6 @@ promptforge-plugin/
 - `refactor:` - Code restructuring (no functionality change)
 - `test:` - Adding or fixing tests
 - `chore:` - Maintenance tasks
-- `perf:` - Performance improvements
 
 ### Examples
 
@@ -336,7 +315,7 @@ feat: Add feature prioritization prompt (PRIME 9.2)
 Created feature-prioritization.md with:
 - RICE/ICE framework scoring
 - B2B SaaS examples
-- Priority matrix visualization
+- 233 lines (streamlined from 536)
 - 9.2 PRIME score (peer reviewed)
 
 Tested with real product roadmap scenario.
@@ -355,13 +334,7 @@ updated the files
 
 ### Branch Strategy
 
-**Current Default Branch:** `claude/review-product-plan-011CUr1GxHrvVy5WmuZEyQov`
-- This is the clean, Sprint 0-ready branch
-- Contains: 7 core docs + archive/ with 19 legacy files
-- Should be set as default on GitHub (Settings → Branches)
-
 **Feature Branches:**
-- Create from current default branch
 - Name format: `claude/feature-name-{sessionId}`
 - Push regularly (at least daily)
 - Merge via pull request when complete
@@ -411,7 +384,7 @@ updated the files
 
 ---
 
-## 📚 Documentation Requirements
+## 📚 Documentation Standards
 
 ### Required Documentation
 
@@ -423,16 +396,13 @@ updated the files
 **For Skills/Agents:**
 - Activation triggers documented
 - Edge cases listed with handling
-- Example interactions shown
+- Brief example interaction (1, not 4)
 - Performance characteristics noted
 
 **For Repository:**
-- README.md (Sprint 0 focus, getting started)
+- README.md (getting started, installation)
 - QUALITY_STANDARDS.md (PRIME framework explained)
 - ENHANCEMENT_GUIDE.md (how to customize)
-- PROMPTFORGE_PRODUCT_PLAN_V2.md (definitive plan)
-- PROMPTFORGE_ARCHITECTURE_V2.md (plugin architecture)
-- Sprint 0 guides (kickoff, tasks, onboarding, quick ref, repo template)
 
 ### Documentation Style
 
@@ -453,55 +423,6 @@ updated the files
 
 ---
 
-## 🚀 Sprint 0 Specific Rules
-
-### Days 1-7 (Week 1)
-
-**AI Engineer Focus:**
-- Repository setup and structure
-- plugin.json configuration
-- PromptForge Skill (browse, load, search modes)
-- Category READMEs
-- Basic testing framework
-
-**Prompt Engineer Focus:**
-- Prompt template design
-- QUALITY_STANDARDS.md (PRIME framework)
-- Enhancement templates
-- Migrate 3 existing prompts
-- Score all 3 using PRIME
-
-### Days 8-14 (Week 2)
-
-**AI Engineer Focus:**
-- Prompt Enhancer subagent + 5 edge cases
-- Prompt Researcher subagent + 5 edge cases
-- 3 custom commands
-- Integration testing
-
-**Prompt Engineer Focus:**
-- Enhancement quality testing
-- Search test cases
-- Command documentation
-- User workflow documentation
-
-### Daily Standup Format
-
-```
-What I completed yesterday:
-- [Specific accomplishment]
-- [Specific accomplishment]
-
-What I'm doing today:
-- [Specific task from sprint plan]
-- [Specific task from sprint plan]
-
-Blockers:
-- [Specific blocker] or "None"
-```
-
----
-
 ## ⚠️ Common Pitfalls to Avoid
 
 ### For Prompts
@@ -510,15 +431,18 @@ Blockers:
 ❌ Missing examples or using Lorem Ipsum
 ❌ No audience context
 ❌ Undefined output format
+❌ **Verbose prompts (700-1000 lines)**
 ✅ Specific, measurable, concrete instructions
+✅ **Concise prompts (200-300 lines)**
 
 ### For Skills/Agents
 ❌ Assuming user intent without confirmation
 ❌ Cluttering main conversation context
 ❌ No fallback for edge cases
 ❌ Technical error messages
-❌ No progress indicators for long operations
+❌ **Extensive example dialogs (4 detailed examples)**
 ✅ Clear activation, isolated context, graceful handling
+✅ **1 brief example interaction**
 
 ### For Documentation
 ❌ Outdated examples or screenshots
@@ -535,6 +459,8 @@ Blockers:
 ### For a Prompt
 - [ ] Written following template structure
 - [ ] PRIME score ≥8.5 (calculated and peer reviewed)
+- [ ] 200-300 lines (conversational length)
+- [ ] 1-2 excellent examples (not 3-4 verbose ones)
 - [ ] Tested with real use case
 - [ ] Enhancement tested (improves score by ≥0.3)
 - [ ] Committed with proper message
@@ -542,63 +468,19 @@ Blockers:
 
 ### For a Skill/Agent
 - [ ] All activation triggers documented
+- [ ] 200-250 lines for Skills (not 500+)
 - [ ] All 5 edge cases handled
 - [ ] Manual testing completed (3+ scenarios)
 - [ ] Performance acceptable (<3 sec or progress shown)
-- [ ] Example interactions documented
+- [ ] 1 brief example documented (not 4 detailed)
 - [ ] Committed with tests documented
 
-### For Sprint 0
-- [ ] Plugin installs locally without errors
-- [ ] Skill auto-activates on PM-related requests
-- [ ] Enhancement improves 3 test prompts by +0.3 avg
-- [ ] Search returns relevant results >80% of time
-- [ ] All 10 edge cases handled gracefully
-- [ ] 3 prompts migrated (interview-analysis, feature-prioritization, feedback-synthesis)
-- [ ] Demo successful in Sprint 0 retrospective
-- [ ] Zero critical bugs
-- [ ] All documentation complete
-
----
-
-## 🔧 Tools & Resources
-
-### Required Tools
-- Git (version control)
-- Text editor (VS Code recommended)
-- Claude Code (for testing)
-- Markdown linter (optional but recommended)
-
-### Key Resources
-- **Product Plan:** PROMPTFORGE_PRODUCT_PLAN_V2.md
-- **Onboarding:** PROMPTFORGE_TEAM_ONBOARDING.md
-- **Sprint Tasks:** PROMPTFORGE_SPRINT0_TASKS.md
-- **Quick Ref:** PROMPTFORGE_QUICK_REFERENCE.md
-- **Setup:** PROMPTFORGE_REPO_TEMPLATE.md
-- **Claude Code Docs:** https://code.claude.com/docs/en/plugin-marketplaces
-
-### Sprint 0 Schedule
-- **Day 1:** Kickoff + setup
-- **Day 7:** Mid-sprint review
-- **Day 14:** Demo + retrospective
-- **Daily:** 15-min standup (same time every day)
-
----
-
-## 📞 Getting Help
-
-### Blockers
-1. Try to solve independently (30 min)
-2. Ask teammate for help (30 min)
-3. Research documentation (30 min)
-4. Escalate to Product Lead
-5. Consider scope adjustment if critical
-
-### Questions
-- Technical: Pair with other engineer
-- Product: Check Product Plan v2.0
-- Process: Check Sprint 0 guides
-- Urgent: Escalate to Product Lead
+### For Documentation
+- [ ] Clear, concise language
+- [ ] All links work
+- [ ] Examples are current
+- [ ] Follows formatting standards
+- [ ] No spelling/grammar errors
 
 ---
 
@@ -607,6 +489,7 @@ Blockers:
 Before every commit:
 - [ ] Code/content follows conventions above
 - [ ] PRIME score documented (if prompt)
+- [ ] Length check: 200-300 lines for prompts, 200-250 for Skills
 - [ ] Edge cases handled (if skill/agent)
 - [ ] Tested manually
 - [ ] Documentation updated
@@ -617,6 +500,6 @@ Before every commit:
 ---
 
 **Last Updated:** November 6, 2025
-**Version:** 1.0 (Sprint 0)
-**Owner:** Product Team
-**Status:** ✅ Active Configuration
+**Version:** 1.1 (Best Practices Focus)
+**Purpose:** Guide AI and Prompt Engineers on technical standards
+**Status:** ✅ Active Best Practices Guide
