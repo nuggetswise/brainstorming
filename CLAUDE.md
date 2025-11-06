@@ -9,14 +9,15 @@
 
 ## 📋 Project Overview
 
-PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (CLEAR 8.5+) with AI-powered enhancement that adapts prompts to user's industry, company stage, and team context.
+PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (PRIME 8.5+) with AI-powered enhancement that adapts prompts to user's industry, company stage, and team context.
 
 **Key Components:**
-- Plugin-based distribution (official Claude Code marketplace)
+- Plugin-based distribution (Claude Code marketplace or GitHub releases)
 - Skills-first architecture (auto-activation)
 - 2 specialized subagents (Prompt Enhancer + Prompt Researcher)
 - 3 custom commands (/prompt-browse, /prompt-enhance, /prompt-score)
 - 70 prompts across 6 categories (Strategy, Research, Execution, Analysis, Communication, Special Workflows)
+- Two-tier system (plugin prompts + user customizations)
 
 ---
 
@@ -31,7 +32,7 @@ PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (CLEAR 
    - Git-friendly, human-readable
 
 2. **Quality Over Quantity**
-   - Every prompt must score 8.5+ on CLEAR framework
+   - Every prompt must score 8.5+ on PRIME framework
    - Peer review required before merge
    - Test enhancement on all prompts
    - Document edge cases thoroughly
@@ -50,18 +51,18 @@ PromptForge is a Claude Code plugin providing 70+ world-class PM prompts (CLEAR 
 
 ---
 
-## 📐 CLEAR Framework (Quality Standard)
+## 📐 PRIME Framework (Quality Standard)
 
-**All prompts MUST be scored using CLEAR framework before inclusion:**
+**All prompts MUST be scored using PRIME framework before inclusion:**
 
 ```
-CLEAR Score = (C × 0.25) + (L × 0.20) + (E × 0.20) + (A × 0.15) + (R × 0.20)
+PRIME Score = (P × 0.25) + (R × 0.20) + (I × 0.20) + (M × 0.15) + (E × 0.20)
 
-C - Clarity (25%): Instructions are unambiguous and specific
-L - Length (20%): Appropriate detail for task complexity
-E - Examples (20%): Concrete examples illustrate desired output
-A - Audience (15%): Target user and context explicit
-R - Result (20%): Desired output format and success criteria defined
+P - Precision (25%): Instructions are unambiguous and specific
+R - Richness (20%): Appropriate detail for task complexity
+I - Instruction (20%): Explicit output format and success criteria
+M - Metadata (15%): Target audience, prerequisites, and context
+E - Examples (20%): Concrete examples demonstrating desired output
 ```
 
 **Quality Thresholds:**
@@ -71,7 +72,17 @@ R - Result (20%): Desired output format and success criteria defined
 - ⚠️ 7.0-7.9 = ACCEPTABLE (significant rework)
 - ❌ <7.0 = REJECT (start over)
 
-**Minimum for inclusion: 8.5 CLEAR score**
+**Minimum for inclusion: 8.5 PRIME score**
+
+### Why PRIME (Not CLEAR)?
+
+Dr. Leo S. Lo published the "CLEAR Framework" in 2023 for teaching how to WRITE prompts to AI (Concise, Logical, Explicit, Adaptive, Reflective). To avoid confusion, we use PRIME to SCORE prompt quality.
+
+**Using Both Frameworks:**
+- **Lo's CLEAR:** Writing guidance when creating prompts
+- **Our PRIME:** Quality scoring for library inclusion
+
+*Credit: Lo, L. S. (2023). "The CLEAR path: A framework for enhancing information literacy through prompt engineering." Journal of Academic Librarianship, 49(4), 102720.*
 
 ---
 
@@ -91,19 +102,64 @@ promptforge-plugin/
 ├── commands/
 │   ├── prompt-browse.md         # SHOULD: Interactive, user-friendly
 │   ├── prompt-enhance.md        # SHOULD: Delegates to subagent
-│   └── prompt-score.md          # SHOULD: Shows CLEAR breakdown
+│   └── prompt-score.md          # SHOULD: Shows PRIME breakdown
 ├── prompts/product-management/
-│   ├── 01-strategy/             # MUST: All P0 prompts ≥9.0 CLEAR
-│   ├── 02-research/             # MUST: All P0 prompts ≥9.0 CLEAR
-│   ├── 03-execution/            # MUST: All P0 prompts ≥9.0 CLEAR
-│   ├── 04-analysis/             # MUST: All P0 prompts ≥9.0 CLEAR
-│   ├── 05-communication/        # MUST: All P0 prompts ≥9.0 CLEAR
-│   └── 06-special-workflows/    # SHOULD: All P1 prompts ≥8.5 CLEAR
+│   ├── 01-strategy/             # MUST: All P0 prompts ≥9.0 PRIME
+│   ├── 02-research/             # MUST: All P0 prompts ≥9.0 PRIME
+│   ├── 03-execution/            # MUST: All P0 prompts ≥9.0 PRIME
+│   ├── 04-analysis/             # MUST: All P0 prompts ≥9.0 PRIME
+│   ├── 05-communication/        # MUST: All P0 prompts ≥9.0 PRIME
+│   └── 06-special-workflows/    # SHOULD: All P1 prompts ≥8.5 PRIME
 └── docs/
-    ├── QUALITY_STANDARDS.md     # MUST: CLEAR framework explained
+    ├── QUALITY_STANDARDS.md     # MUST: PRIME framework explained
     ├── ENHANCEMENT_GUIDE.md     # MUST: How to customize prompts
     └── EXAMPLES.md              # SHOULD: Real usage examples
 ```
+
+### Two-Tier Customization System
+
+**Problem:** Plugin updates overwrite user customizations.
+
+**Solution:**
+
+**Tier 1: Plugin Prompts (Read-Only)**
+```
+~/.claude-code/plugins/promptforge/prompts/
+├── feature-prioritization.md  ← Official version, gets updates
+```
+
+**Tier 2: User Customizations**
+```
+.claude/prompts/custom/
+├── my-feature-prioritization.md  ← User version, safe from updates
+```
+
+**Skill Priority Logic:**
+1. Check `.claude/prompts/custom/` first (user versions)
+2. Fall back to `plugins/promptforge/prompts/` (official versions)
+3. User versions override official
+
+**Benefits:**
+- ✅ User customizations survive plugin updates
+- ✅ Users still receive official prompt updates
+- ✅ Clear separation of concerns
+- ✅ Users can mix custom + official prompts
+
+### Distribution Strategy
+
+**Primary: Claude Code Marketplace**
+- Official distribution channel
+- Auto-update capability
+- Follows aitmpl.com structure (400+ approved components)
+- Discovery through marketplace browsing
+
+**Fallback: GitHub Releases**
+- If marketplace rejects or delays approval
+- Users: `cd ~/.claude-code/plugins/ && git clone [repo] promptforge`
+- Manual updates via `git pull`
+- Still fully functional, just no auto-updates
+
+**Note:** aitmpl.com has 400+ approved components using same structure, so approval likely.
 
 ### Naming Conventions
 
@@ -130,7 +186,7 @@ promptforge-plugin/
 
 **MUST have:**
 - [ ] YAML frontmatter with all required fields
-- [ ] CLEAR score ≥8.5 documented
+- [ ] PRIME score ≥8.5 documented
 - [ ] At least 2 concrete examples
 - [ ] Explicit audience and context
 - [ ] Defined output format and success criteria
@@ -149,7 +205,7 @@ promptforge-plugin/
 - [ ] Lorem Ipsum or placeholder examples
 - [ ] Unclear scope ("analyze data" without context)
 - [ ] Missing metadata fields
-- [ ] CLEAR score <8.5
+- [ ] PRIME score <8.5
 
 ### For Skill/Agent Files
 
@@ -216,7 +272,7 @@ promptforge-plugin/
 ### Before Committing
 
 **For Prompts:**
-- [ ] Score calculated using CLEAR framework
+- [ ] Score calculated using PRIME framework
 - [ ] Peer reviewed by other engineer
 - [ ] Tested with real use case
 - [ ] Enhancement works (if P0/P1 prompt)
@@ -239,10 +295,10 @@ promptforge-plugin/
 
 - [ ] Plugin installs successfully (>95% success rate)
 - [ ] Skill auto-activates appropriately
-- [ ] Enhancement improves CLEAR scores by +0.3 avg
+- [ ] Enhancement improves PRIME scores by +0.3 avg
 - [ ] Search finds relevant prompts (>80% accuracy)
 - [ ] All 10 edge cases handled gracefully
-- [ ] 3 prompts migrated and scored (CLEAR ≥9.0)
+- [ ] 3 prompts migrated and scored (PRIME ≥9.0)
 - [ ] Zero critical bugs
 
 ---
@@ -275,13 +331,13 @@ promptforge-plugin/
 
 **Good:**
 ```
-feat: Add feature prioritization prompt (CLEAR 9.2)
+feat: Add feature prioritization prompt (PRIME 9.2)
 
 Created feature-prioritization.md with:
 - RICE/ICE framework scoring
 - B2B SaaS examples
 - Priority matrix visualization
-- 9.2 CLEAR score (peer reviewed)
+- 9.2 PRIME score (peer reviewed)
 
 Tested with real product roadmap scenario.
 ```
@@ -318,7 +374,7 @@ updated the files
 **Merging:**
 - Requires peer review
 - All tests must pass
-- CLEAR scores documented
+- PRIME scores documented
 - No merge conflicts
 
 ### Pull Request Template
@@ -328,7 +384,7 @@ updated the files
 [Brief description of changes]
 
 ## Type of Change
-- [ ] New prompt (CLEAR score: X.X)
+- [ ] New prompt (PRIME score: X.X)
 - [ ] Skill/Agent improvement
 - [ ] Documentation update
 - [ ] Bug fix
@@ -338,12 +394,12 @@ updated the files
 - [ ] Edge cases verified
 - [ ] Performance acceptable
 
-## CLEAR Score (if prompt)
-- Clarity: X/10
-- Length: X/10
+## PRIME Score (if prompt)
+- Precision: X/10
+- Richness: X/10
+- Instruction: X/10
+- Metadata: X/10
 - Examples: X/10
-- Audience: X/10
-- Result: X/10
 - **Total: X.X/10**
 
 ## Checklist
@@ -372,9 +428,10 @@ updated the files
 
 **For Repository:**
 - README.md (Sprint 0 focus, getting started)
-- QUALITY_STANDARDS.md (CLEAR framework explained)
+- QUALITY_STANDARDS.md (PRIME framework explained)
 - ENHANCEMENT_GUIDE.md (how to customize)
 - PROMPTFORGE_PRODUCT_PLAN_V2.md (definitive plan)
+- PROMPTFORGE_ARCHITECTURE_V2.md (plugin architecture)
 - Sprint 0 guides (kickoff, tasks, onboarding, quick ref, repo template)
 
 ### Documentation Style
@@ -409,10 +466,10 @@ updated the files
 
 **Prompt Engineer Focus:**
 - Prompt template design
-- QUALITY_STANDARDS.md
+- QUALITY_STANDARDS.md (PRIME framework)
 - Enhancement templates
 - Migrate 3 existing prompts
-- Score all 3 using CLEAR
+- Score all 3 using PRIME
 
 ### Days 8-14 (Week 2)
 
@@ -477,7 +534,7 @@ Blockers:
 
 ### For a Prompt
 - [ ] Written following template structure
-- [ ] CLEAR score ≥8.5 (calculated and peer reviewed)
+- [ ] PRIME score ≥8.5 (calculated and peer reviewed)
 - [ ] Tested with real use case
 - [ ] Enhancement tested (improves score by ≥0.3)
 - [ ] Committed with proper message
@@ -549,7 +606,7 @@ Blockers:
 
 Before every commit:
 - [ ] Code/content follows conventions above
-- [ ] CLEAR score documented (if prompt)
+- [ ] PRIME score documented (if prompt)
 - [ ] Edge cases handled (if skill/agent)
 - [ ] Tested manually
 - [ ] Documentation updated

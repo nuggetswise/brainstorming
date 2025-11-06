@@ -95,7 +95,7 @@
   - Create `docs/PROMPT_TEMPLATE.md`
   - Define YAML frontmatter structure:
     - name, category, subcategory, description
-    - clear_score, industry, company_stage
+    - prime_score, industry, company_stage
     - time_estimate, difficulty, frameworks
     - tags, related_prompts, version, last_updated
   - Define content sections:
@@ -111,10 +111,11 @@
   - **Output:** Template documented
 
 - [ ] **Task 1.2: Write QUALITY_STANDARDS.md** (1.5 hours)
-  - Explain CLEAR framework in depth
-  - Scoring rubric for each dimension (C, L, E, A, R)
+  - Explain PRIME framework in depth
+  - Scoring rubric for each dimension (P, R, I, M, E)
   - Examples of 3/10, 7/10, 10/10 scores
   - Quality thresholds table
+  - Acknowledge Lo's CLEAR framework (different purpose)
   - Common mistakes to avoid
   - **Output:** Quality standards documented
 
@@ -196,7 +197,7 @@
   - Write logic to:
     - Show category tree with counts
     - Display top 3 prompts per category
-    - Include CLEAR scores, time, difficulty
+    - Include PRIME scores, time, difficulty
     - Ask for category or specific prompt
   - Include example response template
   - **Output:** Browse mode documented
@@ -323,11 +324,11 @@
   - **Output:** prompts/product-management/02-research/interview-analysis.md
 
 - [ ] **Task 3.2: Score interview-analysis** (1 hour)
-  - Score each CLEAR dimension (0-10)
+  - Score each PRIME dimension (0-10)
   - Calculate total score
   - Document scoring rationale
   - If <9.0, iterate to improve
-  - **Output:** CLEAR score ≥9.0, scoring notes
+  - **Output:** PRIME score ≥9.0, scoring notes
 
 - [ ] **Task 3.3: Create Scoring Worksheet** (1 hour)
   - Create `docs/SCORING_WORKSHEET.md`
@@ -355,7 +356,7 @@
 
 **AI Engineer Tasks (6-8 hours) - SUPPORT:**
 
-- [ ] **Task 3.1: Build CLEAR Scoring Script** (3-4 hours)
+- [ ] **Task 3.1: Build PRIME Scoring Script** (3-4 hours)
   - Create `scripts/score-prompt.py` or `.js`
   - Parse YAML frontmatter from prompt file
   - Parse content sections
@@ -365,7 +366,7 @@
     - Examples: detect example sections, count
     - Audience: check for audience section
     - Result: check for output format section
-  - Calculate total CLEAR score
+  - Calculate total PRIME score
   - Output: Score report
   - **Output:** Automated scoring assistant
 
@@ -402,7 +403,7 @@
 
 **Checklist:**
 - [ ] interview-analysis.md migrated
-- [ ] CLEAR score ≥9.0
+- [ ] PRIME score ≥9.0
 - [ ] Scoring script working
 - [ ] Skill loads prompt correctly
 - [ ] Ready for Day 4 (migrate 2 more)
@@ -420,16 +421,16 @@
 - [ ] **Task 4.1: Migrate feature-prioritization.md** (3 hours)
   - Same process as Day 3
   - Convert to template
-  - Score using CLEAR
+  - Score using PRIME
   - Iterate if needed
-  - **Output:** feature-prioritization.md (CLEAR ≥9.0)
+  - **Output:** feature-prioritization.md (PRIME ≥9.0)
 
 - [ ] **Task 4.2: Migrate feedback-synthesis.md** (3 hours)
   - Same process
   - Convert to template
-  - Score using CLEAR
+  - Score using PRIME
   - Iterate if needed
-  - **Output:** feedback-synthesis.md (CLEAR ≥9.0)
+  - **Output:** feedback-synthesis.md (PRIME ≥9.0)
 
 - [ ] **Task 4.3: Cross-Check All 3 Prompts** (1 hour)
   - Verify all follow template exactly
@@ -463,7 +464,7 @@
 - [ ] **Task 4.2: Refine Skill Display** (2 hours)
   - Improve formatting
   - Add color/icons if possible
-  - Make CLEAR scores prominent
+  - Make PRIME scores prominent
   - Enhance readability
   - **Output:** Polished skill output
 
@@ -497,7 +498,7 @@
 
 **Checklist:**
 - [ ] All 3 prompts migrated (interview-analysis, feature-prioritization, feedback-synthesis)
-- [ ] All scored ≥9.0 CLEAR
+- [ ] All scored ≥9.0 PRIME
 - [ ] Skill works with all 3
 - [ ] Search functional
 - [ ] Ready for Day 5-7 (polish and prepare for Week 2)
@@ -650,7 +651,7 @@
   - Team context transformations
   - **Output:** All dimensions implemented
 
-- [ ] **Task 9.2: CLEAR Score Comparison** (2 hours)
+- [ ] **Task 9.2: PRIME Score Comparison** (2 hours)
   - Calculate original prompt score
   - Calculate enhanced prompt score
   - Show side-by-side comparison
@@ -930,7 +931,7 @@
 
 - [ ] **Task 13.3: Create /prompt-score** (2 hours)
   - Create `commands/prompt-score.md`
-  - Calculate CLEAR score for any prompt
+  - Calculate PRIME score for any prompt
   - Show detailed breakdown
   - **Output:** Score command works
 
@@ -1034,7 +1035,7 @@
 **Success Criteria Review:**
 - [ ] Can install plugin locally
 - [ ] Skill auto-activates correctly
-- [ ] Enhancement improves CLEAR scores by +0.3
+- [ ] Enhancement improves PRIME scores by +0.3
 - [ ] Search finds relevant prompts
 - [ ] All 10 edge cases handled gracefully
 - [ ] 3 prompts migrated and scored
@@ -1050,7 +1051,7 @@
 - ✅ Prompt Enhancer subagent with 5 edge cases
 - ✅ Prompt Researcher subagent with 5 edge cases
 - ✅ 3 custom commands
-- ✅ 3 prompts migrated and scored (CLEAR ≥9.0)
+- ✅ 3 prompts migrated and scored (PRIME ≥9.0)
 - ✅ Complete documentation
 
 **Ready for Sprint 1: P0 Content Creation!**
