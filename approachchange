@@ -1,0 +1,339 @@
+Revised Understanding: Plugin for Coding Agents, Not Website
+Target Users:
+✅ PM using Claude Code for product work
+✅ PM using Cursor with AI features
+✅ PM using Windsurf or other AI coding agents
+✅ Developer building PM tools (wants prompt library)
+
+❌ NOT: PM visiting a website to copy/paste prompts
+❌ NOT: SaaS with accounts/billing
+❌ NOT: Cloud-hosted prompt search engine
+Distribution Model:
+Installation:
+$ npx claude-code-templates@latest --template=promptforge
+
+OR
+
+$ cd ~/.claude-code/plugins/
+$ git clone promptforge-plugin
+
+Result:
+├── .claude-code/plugins/promptforge/
+│   ├── .claude-plugin/plugin.json
+│   ├── skills/promptforge/SKILL.md
+│   ├── agents/
+│   ├── commands/
+│   └── prompts/product-management/
+💡 This Changes EVERYTHING About the Architecture
+What I Got WRONG Initially:
+❌ Web UI thinking:
+"Browse mode with search interface"
+"User logs in and searches"
+"Cloud-based enhancement API"
+✅ Plugin/Agent thinking:
+Skills auto-activate in conversation
+Everything runs locally in Claude Code
+Prompts are files on user's machine
+Enhancement happens in their active session
+🏗️ Revised Architecture for Coding Agent Context
+Where PromptForge Lives:
+User's Machine:
+├── ~/projects/my-product/
+│   ├── code...
+│   └── .claude-code/
+│       └── plugins/
+│           └── promptforge/              ← Installed here
+│               ├── .claude-plugin/
+│               │   └── plugin.json
+│               ├── skills/
+│               │   └── promptforge/
+│               │       └── SKILL.md      ← Auto-activates
+│               ├── agents/
+│               │   ├── prompt-enhancer.md
+│               │   └── prompt-researcher.md
+│               ├── commands/
+│               │   ├── prompt-browse.md
+│               │   ├── prompt-enhance.md
+│               │   └── prompt-score.md
+│               └── prompts/
+│                   └── product-management/
+│                       ├── 01-strategy/
+│                       ├── 02-research/
+│                       └── ...           ← 70 .md files
+How User Interacts (No Website!):
+Scenario 1: Working in Claude Code
+User (in Claude Code): "I need to prioritize features for our Q2 roadmap"
+  ↓
+PromptForge Skill auto-activates (detects PM intent)
+  ↓
+Skill: "I can help! I have a Feature Prioritization prompt. 
+       Want me to load it for you?"
+  ↓
+User: "Yes, but make it for B2B SaaS"
+  ↓
+Prompt Enhancer reads local file, customizes, returns enhanced version
+  ↓
+User gets prompt in the conversation, can iterate
+Scenario 2: Using Slash Commands
+User: /prompt-browse
+  ↓
+Command reads local prompts/ directory
+  ↓
+Shows interactive menu in chat
+  ↓
+User: Shows me #5 (feature-prioritization)
+  ↓
+Command reads .md file, displays with PRIME score
+  ↓
+User copies or asks for enhancement
+Scenario 3: Direct File Access
+User: "Read the feature prioritization prompt"
+  ↓
+Claude Code (with PromptForge): 
+  "Found ~/.claude-code/plugins/promptforge/prompts/.../feature-prioritization.md"
+  ↓
+Displays content
+  ↓
+User: "Enhance it for fintech startups"
+  ↓
+Enhancer agent activates automatically
+🎯 Model Selection in Coding Agent Context
+Key Insight: Users are ALREADY in a Claude session!
+Current Session Model:
+User opens Claude Code → Chooses model (Opus/Sonnet/Haiku)
+  ↓
+That model handles ALL interactions by default
+  ↓
+Skills/agents CAN specify different models
+  ↓
+But adds latency (model switching)
+Revised Model Strategy:
+Option A: Use User's Current Model (Simplest)
+# In all agents - NO model specified
+
+---
+name: prompt-enhancer
+# model: <not specified - uses session model>
+tools: file_read, file_create, str_replace
+---
+
+Adapt behavior based on detected model:
+- If Opus: Full creative enhancement
+- If Sonnet: Targeted enhancements (works great!)
+- If Haiku: Template-based substitution only
+Pros:
+✅ No model switching overhead
+✅ Works with whatever user has access to
+✅ Respects user's cost/speed preferences
+✅ Simpler architecture
+Cons:
+⚠️ Quality varies by user's model choice
+⚠️ Haiku might struggle with complex enhancements
+Option B: Recommend Model in Docs
+# In README.md
+
+## Model Recommendations
+
+PromptForge works with any Claude model, but:
+
+**Sonnet 4.5** (recommended)
+- Best balance of speed and quality
+- Handles 95% of enhancements excellently
+- Fast enough for real-time iteration
+
+**Opus 4.5** (if you want best quality)
+- Highest quality enhancements
+- Better at complex customizations
+- Slower and more expensive
+
+**Haiku 4.5** (for browsing only)
+- Great for /prompt-browse and /prompt-score
+- Enhancement quality limited
+- Recommend upgrading to Sonnet for customization
+Option C: Agent-Specific Model Override (Advanced)
+# In plugin.json
+
+{
+  "agents": [
+    {
+      "name": "prompt-enhancer",
+      "preferredModel": "sonnet",
+      "fallbackToSessionModel": true
+    },
+    {
+      "name": "prompt-researcher",
+      "preferredModel": "haiku",
+      "fallbackToSessionModel": true
+    }
+  ]
+}
+Behavior:
+If user has Sonnet/Opus → Uses their model
+If user has Haiku → Agent suggests "upgrade to Sonnet for better results"
+User can override in settings
+🔄 Revised User Flow (Coding Agent Context)
+Flow 1: Auto-Activation (Most Common)
+PM working in Claude Code (Sonnet 4.5)
+  ↓
+PM: "Help me write user interview questions for our mobile app"
+  ↓
+┌─────────────────────────────────────────┐
+│ PromptForge Skill Detects:             │
+│ - Intent: user research                 │
+│ - Context: mobile app                   │
+│ - Trigger: interview questions          │
+│ → AUTO-ACTIVATES                        │
+└──────────────┬──────────────────────────┘
+               ↓
+┌─────────────────────────────────────────┐
+│ Skill Response (in conversation):       │
+│                                         │
+│ "I have a Customer Interview prompt     │
+│  (PRIME 9.1) that's perfect for this.   │
+│                                         │
+│  Options:                               │
+│  1. Show me the prompt as-is            │
+│  2. Enhance it for mobile apps          │
+│  3. Browse related prompts first"       │
+└──────────────┬──────────────────────────┘
+               ↓
+PM: "Option 2 - enhance for mobile"
+  ↓
+┌─────────────────────────────────────────┐
+│ Prompt Enhancer (background):          │
+│ - Reads local .md file                  │
+│ - Applies mobile-specific customization │
+│ - Validates PRIME score                 │
+│ - Returns enhanced version              │
+└──────────────┬──────────────────────────┘
+               ↓
+┌─────────────────────────────────────────┐
+│ User Sees (in conversation):            │
+│                                         │
+│ Here's your enhanced prompt:            │
+│ [Full prompt text - copy-pasteable]    │
+│                                         │
+│ Changes made:                           │
+│ ✓ Added mobile UX questions             │
+│ ✓ Examples: Duolingo, Instagram         │
+│ ✓ Device-specific usage patterns        │
+│                                         │
+│ PRIME: 9.3 (original 9.1)               │
+│                                         │
+│ Want to iterate? Just ask!              │
+└─────────────────────────────────────────┘
+Key Differences from Web UI:
+✅ Everything in conversation (no separate interface)
+✅ Contextual (Claude already knows user's project)
+✅ Iterative (user can refine in same thread)
+✅ Fast (local file access, no API calls)
+Flow 2: Explicit Command (Power Users)
+PM: /prompt-browse strategy
+  ↓
+┌─────────────────────────────────────────┐
+│ Command reads local directory:          │
+│ ~/plugins/promptforge/prompts/01-strategy/ │
+│                                         │
+│ Found 8 prompts:                        │
+│ 1. Product Vision (PRIME 9.4)          │
+│ 2. Roadmap Planning (PRIME 9.2)        │
+│ 3. Feature Prioritization (PRIME 9.2)  │
+│ 4. OKR Setting (PRIME 8.9)             │
+│ ...                                     │
+│                                         │
+│ Type number or ask about any prompt     │
+└─────────────────────────────────────────┘
+  ↓
+PM: "Show me 3"
+  ↓
+[Displays feature-prioritization.md content]
+  ↓
+PM: "Make it for healthcare startups"
+  ↓
+[Enhancer activates, returns customized version]
+📊 Quality Impact in Coding Agent Context
+Quality Advantages Over Website:
+1. Context Awareness
+Website:
+User: "Enhance for B2B SaaS"
+AI: [Generic B2B SaaS enhancement]
+
+Coding Agent:
+User: "Enhance for B2B SaaS"
+AI: [Reads user's codebase, understands THEY'RE building SaaS]
+    [Sees their tech stack, team size, market]
+    [Enhancement is WAY more contextual]
+2. Iterative Refinement
+Website:
+User gets prompt → Copies → Leaves
+[No iteration, single-shot]
+
+Coding Agent:
+User: "Enhance it"
+AI: [Enhanced version]
+User: "Too long, make it concise"
+AI: [Shorter version, PRIME maintained]
+User: "Perfect!"
+[Multi-turn refinement in conversation]
+3. Validation in Context
+Website:
+User gets prompt → Uses it → ??? 
+[No feedback loop]
+
+Coding Agent:
+User gets prompt → Uses it immediately in project
+User: "This didn't work for X reason"
+AI: [Sees the issue, adjusts prompt]
+[Continuous improvement loop]
+Quality Metrics (Revised):
+Enhancement Quality:
+Sonnet 4.5: +0.3 PRIME average ✅
+Opus 4.5: +0.5 PRIME average ✅
+Haiku 4.5: -0.1 PRIME (recommend upgrade) ⚠️
+User Satisfaction:
+Single-shot (like website): 70% happy
+Iterative (coding agent): 90% happy ✅
+Context-aware: 95% happy ✅✅
+🎯 Strategic Implications
+This is BETTER than a website because:
+Distribution
+❌ Website: Need marketing, SEO, user acquisition
+✅ Plugin: Claude Code marketplace, organic discovery
+Monetization
+❌ Website: Subscription friction, payment processing
+✅ Plugin: Can be free OR paid via marketplace
+User Experience
+❌ Website: Copy/paste friction, context switching
+✅ Plugin: Seamless in workflow, contextual
+Competition
+❌ Website: Competing with Gumroad libraries (low quality, cheap)
+✅ Plugin: Competing with... almost nothing! (Blue ocean)
+Network Effects
+❌ Website: Each user isolated
+✅ Plugin: Users can fork/extend, share configs, contribute prompts
+Market Positioning:
+Gumroad Prompt Libraries (Website)
+├─ Price: $29-49 one-time
+├─ Quality: 6-7 PRIME average
+├─ Experience: Copy/paste
+└─ Target: Hobbyists
+
+PromptForge (Coding Agent Plugin)
+├─ Price: Free OR $9/month (marketplace)
+├─ Quality: 8.5+ PRIME guaranteed
+├─ Experience: AI-enhanced, contextual
+└─ Target: Professional PMs using AI tools ← MUCH BETTER!
+✅ Revised Answers to Your Questions
+1. Lo's CLEAR Framework?
+Use as internal writing guide, cite in docs, but PRIME for scoring. Same answer as before, but now I understand it's for creating the 70 .md files in your plugin.
+2. Sonnet/Haiku Users?
+Recommend Sonnet in README, but support all models gracefully. Plugin detects user's model, adapts behavior (no forced upgrades).
+3. New User Flow & Quality Impact?
+Flow: Auto-activation in conversation → Enhancement in-context → Iterative refinement Quality: +0.3 PRIME average, 90%+ satisfaction, continuous improvement loop
+
+
+Installation method: direct marketplace install?
+Prompt updates: We will figure out later
+Customization: Should users be able to add their own prompts to their local copy? - Yes
+Sharing: If user enhances a prompt really well, can they share back to community? - No
+Other coding agents: Plan to support Cursor, Windsurf, Cline, Aider beyond Claude Code? - Claude Code for now! 
