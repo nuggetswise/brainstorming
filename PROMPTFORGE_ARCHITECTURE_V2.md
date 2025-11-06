@@ -74,6 +74,69 @@ $ cd ~/.claude-code/plugins/
 $ git clone [promptforge-repo] promptforge
 ```
 
+### Distribution Strategy
+
+**Primary: Claude Code Marketplace**
+- Official distribution channel
+- Auto-update capability
+- Follows aitmpl.com structure (400+ approved components)
+- Discovery through marketplace browsing
+- Recommended installation method
+
+**Fallback: GitHub Releases**
+- If marketplace rejects or delays approval
+- Users: `cd ~/.claude-code/plugins/ && git clone [repo] promptforge`
+- Manual updates via `git pull`
+- Still fully functional, just no auto-updates
+
+**Note:** aitmpl.com has 400+ approved components using the same structure, so marketplace approval is likely. We prepare the GitHub fallback just in case.
+
+### Two-Tier Customization System
+
+**Problem:** Plugin updates overwrite user customizations 😡
+
+**Solution: Two-Tier Architecture**
+
+**Tier 1: Plugin Prompts (Read-Only)**
+```
+~/.claude-code/plugins/promptforge/prompts/
+├── feature-prioritization.md  ← Official version, receives updates
+```
+- Managed by plugin
+- Gets updates from marketplace/git
+- Users should NOT edit these files
+
+**Tier 2: User Customizations (Safe to Edit)**
+```
+.claude/prompts/custom/
+├── my-feature-prioritization.md  ← User version, safe from updates
+├── my-custom-prompt.md           ← User's own prompts
+```
+- User's personal folder
+- Never touched by plugin updates
+- Can be version controlled with user's project
+
+**Skill Priority Logic:**
+1. Check `.claude/prompts/custom/` first (user versions)
+2. Fall back to `plugins/promptforge/prompts/` (official versions)
+3. User versions override official prompts with same name
+
+**Benefits:**
+- ✅ User customizations survive plugin updates
+- ✅ Users still receive official prompt updates
+- ✅ Clear separation of concerns (official vs custom)
+- ✅ Users can mix custom + official prompts
+- ✅ Users can create entirely new prompts
+
+**User Workflow:**
+```
+1. User finds official prompt: feature-prioritization.md
+2. User enhances it for their industry (via Enhancer agent)
+3. User saves to: .claude/prompts/custom/my-feature-prioritization.md
+4. Next time, skill finds custom version first
+5. Official prompt still gets updates (user can compare)
+```
+
 ---
 
 ## 🎬 User Interaction Flows
