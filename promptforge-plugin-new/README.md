@@ -2,31 +2,50 @@
 
 **70+ world-class Product Management prompts with AI-powered enhancement**
 
-> Native Claude Code plugin | Free & Open Source | PRIME 8.5+ Quality
+> Native Claude Code plugin | Free & Open Source
 
-Complete plugin structure created following Claude Code specifications.
+---
 
-## Status
+## 🎯 What is PromptForge?
 
-**Version:** 0.1.0 (Sprint 0 - Infrastructure Complete)
+A curated library of high-quality PM prompts that integrates directly into Claude Code with intelligent enhancement.
 
-**Completed:**
-- ✅ Plugin manifest (plugin.json)
-- ✅ PromptForge Skill (auto-activation, 3 modes)
-- ✅ Prompt Enhancer agent (5 edge cases)
-- ✅ Prompt Researcher agent (5 edge cases)
-- ✅ 3 commands (/prompt-browse, /prompt-enhance, /prompt-score)
-- ✅ 6 category structures with READMEs
-- ✅ Quality standards documentation (PRIME framework)
-- ✅ Prompt template for contributors
+**The Problem:**
+- PMs waste hours crafting prompts from scratch
+- Generic prompts need heavy customization
+- Quality is inconsistent
 
-**Next Steps:**
-- Sprint 1: Migrate 20 P0 prompts (PRIME 9.0+)
-- Sprint 2: Enhancement refinement
-- Sprint 3: Add 50 P1 prompts (PRIME 8.5+)
-- Sprint 4: Polish and launch
+**Our Solution:**
+- 70+ professionally curated prompts covering all PM disciplines
+- AI-powered enhancement adapts to your industry and context
+- Native Claude Code integration (no copy/paste)
+- Auto-activation when you need PM help
 
-## Installation
+---
+
+## ✨ Key Features
+
+### 1. Comprehensive Library
+
+**6 Categories | 70+ Prompts:**
+- **Strategy** - Vision, roadmaps, OKRs
+- **Research** - Interviews, personas, competitive analysis
+- **Execution** - PRDs, user stories, sprint planning
+- **Analysis** - A/B tests, metrics, data
+- **Communication** - Updates, presentations
+- **Special Workflows** - Launch planning, processes
+
+### 2. AI-Powered Enhancement
+
+Customizes prompts for your industry, stage, and preferences.
+
+### 3. Auto-Activation
+
+Detects when you need PM help and suggests relevant prompts.
+
+---
+
+## 🚀 Installation
 
 ```bash
 # Via Claude Code marketplace (when published)
@@ -37,18 +56,38 @@ cd ~/.claude-code/plugins/
 git clone https://github.com/nuggetswise/promptforge
 ```
 
-## Quick Start
+---
+
+## 📖 Quick Start
 
 ```
-/prompt-browse [category]    # Explore prompts
-/prompt-enhance [name]       # Customize prompt
-/prompt-score [text]         # Calculate PRIME score
+/prompt-browse research        # Explore category
+/prompt-enhance "PRD Guide"    # Customize prompt
 ```
 
-## Documentation
+---
 
-- [Quality Standards](docs/QUALITY_STANDARDS.md) - PRIME framework explained
+## 🛠️ Development Status
+
+**Version:** 0.1.0 (Sprint 0 - Infrastructure Complete)
+
+**Completed:**
+- ✅ Plugin structure
+- ✅ Auto-activation Skill
+- ✅ Enhancement & search agents
+- ✅ Commands
+- ✅ Category organization
+
+**Next:** Migrate 70+ prompts
+
+---
+
+## 📄 Documentation
+
+- [Quality Standards](docs/QUALITY_STANDARDS.md) - For contributors
 - [Prompt Template](docs/PROMPT_TEMPLATE.md) - How to create prompts
+
+---
 
 ## License
 
