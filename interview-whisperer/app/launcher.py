@@ -28,7 +28,7 @@ class InterviewWhispererLauncher:
         self.root.resizable(False, False)
 
         # Paths
-        self.base_dir = Path("/home/user/interview-whisperer")
+        self.base_dir = Path("/home/user/brainstorming/interview-whisperer")
         self.docs_dir = self.base_dir / "documents"
         self.vector_db_dir = self.base_dir / "data" / "chroma_db"
 
