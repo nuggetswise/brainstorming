@@ -40,8 +40,8 @@ class InterviewWhispererLauncher:
         # Settings manager
         self.settings_manager = SettingsManager()
 
-        # Interview copilot
-        self.copilot = InterviewCopilot()
+        # Interview copilot (with settings integration)
+        self.copilot = InterviewCopilot(settings_manager=self.settings_manager)
         self.interview_active = False
 
         # Setup UI
