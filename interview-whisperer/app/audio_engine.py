@@ -44,7 +44,7 @@ class AudioEngine:
     - Thread-safe operations
     """
 
-    def __init__(self, model: str = "base", language: str = "en"):
+    def __init__(self, model: str = "base", language: str = "en", config: Optional[AudioConfig] = None):
         """
         Initialize the audio engine.
 
@@ -52,8 +52,9 @@ class AudioEngine:
             model: Whisper model size ("tiny", "base", "small", "medium", "large")
                   "base" is recommended for M3 Mac (fast + accurate enough)
             language: Language code for transcription ("en" for English)
+            config: Optional custom AudioConfig. If None, uses defaults.
         """
-        self.config = AudioConfig()
+        self.config = config if config is not None else AudioConfig()
         self.language = language
         self.model_name = model
 
@@ -145,6 +146,25 @@ class AudioEngine:
 
         self._audio_buffer = []
         logger.info("🛑 Audio engine stopped")
+
+    def update_config(self, config: AudioConfig) -> None:
+        """
+        Update audio configuration.
+
+        Note: Must call stop_listening() before updating config.
+        Changes take effect on next start_listening() call.
+
+        Args:
+            config: New AudioConfig to use
+
+        Raises:
+            RuntimeError: If currently listening
+        """
+        if self._is_listening:
+            raise RuntimeError("Cannot update config while listening. Call stop_listening() first.")
+
+        self.config = config
+        logger.info(f"Audio config updated: sensitivity={config.silence_threshold}, chunk={config.chunk_duration}s")
 
     def get_status(self) -> Dict[str, any]:
         """

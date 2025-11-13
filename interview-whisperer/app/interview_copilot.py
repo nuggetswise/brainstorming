@@ -71,9 +71,15 @@ class InterviewCopilot:
     5. Session logged for review
     """
 
-    def __init__(self):
-        """Initialize the Interview Copilot."""
+    def __init__(self, settings_manager=None):
+        """
+        Initialize the Interview Copilot.
+
+        Args:
+            settings_manager: Optional SettingsManager instance. If None, uses defaults.
+        """
         self.logger = logging.getLogger('InterviewWhisperer.Copilot')
+        self.settings_manager = settings_manager
 
         # State
         self._is_active = False
@@ -94,7 +100,7 @@ class InterviewCopilot:
 
     def initialize_components(self) -> bool:
         """
-        Initialize all components.
+        Initialize all components using settings if available.
 
         Returns:
             True if successful, False otherwise
@@ -102,29 +108,68 @@ class InterviewCopilot:
         try:
             self.logger.info("Initializing components...")
 
+            # Get settings or use defaults
+            if self.settings_manager:
+                doc_config = self.settings_manager.get_document_config()
+                audio_config = self.settings_manager.get_audio_config()
+                llm_config = self.settings_manager.get_llm_config()
+                overlay_config = self.settings_manager.get_overlay_config()
+                self.logger.info("Using custom settings from SettingsManager")
+            else:
+                # Fallback to config.py defaults
+                doc_config = {}
+                audio_config = {'model': WHISPER_MODEL}
+                llm_config = {'model': OLLAMA_LLM_MODEL}
+                overlay_config = {}
+                self.logger.info("Using default settings from config.py")
+
             # Initialize document processor
             self.document_processor = DocumentProcessor(
                 documents_dir=str(DOCUMENTS_DIR),
-                db_path=str(CHROMA_DB_DIR)
+                db_path=str(CHROMA_DB_DIR),
+                chunk_size=doc_config.get('chunk_size', 500),
+                chunk_overlap=doc_config.get('chunk_overlap', 50),
+                supported_extensions=set(doc_config.get('supported_extensions', ['.pdf', '.docx', '.txt', '.md'])),
+                embedding_model=llm_config.get('embed_model', 'nomic-embed-text')
             )
             self.logger.info("✓ Document processor initialized")
 
             # Initialize LLM engine
             self.llm_engine = LLMEngine(
                 db_path=str(CHROMA_DB_DIR),
-                model=OLLAMA_LLM_MODEL
+                model=llm_config.get('model', OLLAMA_LLM_MODEL),
+                embed_model=llm_config.get('embed_model', 'nomic-embed-text')
             )
             self.logger.info("✓ LLM engine initialized")
 
-            # Initialize audio engine
+            # Initialize audio engine with AudioConfig
+            from audio_engine import AudioConfig
+            audio_cfg = AudioConfig(
+                sample_rate=audio_config.get('sample_rate', 16000),
+                channels=audio_config.get('channels', 1),
+                chunk_duration=audio_config.get('chunk_duration', 5.0),
+                silence_threshold=audio_config.get('silence_threshold', 0.01),
+                silence_duration=audio_config.get('silence_duration', 1.5),
+                context_duration=audio_config.get('context_duration', 30.0)
+            )
             self.audio_engine = AudioEngine(
-                model=WHISPER_MODEL,
-                language="en"
+                model=audio_config.get('model', WHISPER_MODEL),
+                language="en",
+                config=audio_cfg
             )
             self.logger.info("✓ Audio engine initialized")
 
             # Initialize overlay
-            self.overlay = OverlayWindow()
+            self.overlay = OverlayWindow(
+                width=overlay_config.get('width', 400),
+                height=overlay_config.get('height', 350),
+                transparency=overlay_config.get('transparency', 0.95),
+                position=overlay_config.get('position', 'top-right'),
+                font_size=overlay_config.get('font_size', 10),
+                always_on_top=overlay_config.get('always_on_top', True),
+                show_confidence=overlay_config.get('show_confidence', True),
+                show_sources=overlay_config.get('show_sources', True)
+            )
             self.logger.info("✓ Overlay window initialized")
 
             return True

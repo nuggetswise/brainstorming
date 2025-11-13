@@ -14,6 +14,8 @@ from pathlib import Path
 
 # Import copilot
 from interview_copilot import InterviewCopilot
+from settings_manager import SettingsManager
+from settings_dialog import SettingsDialog
 
 
 class InterviewWhispererLauncher:
@@ -35,8 +37,11 @@ class InterviewWhispererLauncher:
         self.doc_count = tk.StringVar(value="Checking...")
         self.ready_status = tk.StringVar(value="Initializing...")
 
-        # Interview copilot
-        self.copilot = InterviewCopilot()
+        # Settings manager
+        self.settings_manager = SettingsManager()
+
+        # Interview copilot (with settings integration)
+        self.copilot = InterviewCopilot(settings_manager=self.settings_manager)
         self.interview_active = False
 
         # Setup UI
@@ -636,15 +641,27 @@ class InterviewWhispererLauncher:
 
     def open_settings(self):
         """Open settings window"""
-        messagebox.showinfo(
-            "Settings",
-            "Settings panel will be implemented next.\n\n"
-            "Planned settings:\n"
-            "• Ollama model selection\n"
-            "• Voice activation sensitivity\n"
-            "• Display preferences\n"
-            "• Document processing options"
-        )
+        try:
+            # Create and show settings dialog
+            dialog = SettingsDialog(
+                self.root,
+                self.settings_manager,
+                on_save=self.on_settings_saved
+            )
+
+            # Wait for dialog to close
+            self.root.wait_window(dialog.dialog)
+
+        except Exception as e:
+            messagebox.showerror(
+                "Error",
+                f"Failed to open settings:\n{str(e)}"
+            )
+
+    def on_settings_saved(self):
+        """Callback when settings are saved"""
+        # Refresh status to reflect any changes
+        self.refresh_status()
 
     def on_close(self):
         """Handle window close"""

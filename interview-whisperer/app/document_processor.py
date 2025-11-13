@@ -43,16 +43,26 @@ class DocumentProcessor:
     EMBEDDING_MODEL = 'nomic-embed-text'
     COLLECTION_NAME = 'interview_context'
 
-    def __init__(self, documents_dir: str, db_path: str):
+    def __init__(self, documents_dir: str, db_path: str, chunk_size: int = 500,
+                 chunk_overlap: int = 50, supported_extensions: Optional[set] = None,
+                 embedding_model: Optional[str] = None):
         """
         Initialize the DocumentProcessor.
 
         Args:
             documents_dir: Path to directory containing documents
             db_path: Path to ChromaDB storage location
+            chunk_size: Size of text chunks in words (default: 500)
+            chunk_overlap: Overlap between chunks in words (default: 50)
+            supported_extensions: Set of supported file extensions (default: {'.pdf', '.docx', '.txt', '.md'})
+            embedding_model: Ollama embedding model to use (default: 'nomic-embed-text')
         """
         self.documents_dir = Path(documents_dir)
         self.db_path = Path(db_path)
+        self.chunk_size = chunk_size
+        self.chunk_overlap = chunk_overlap
+        self.supported_extensions = supported_extensions if supported_extensions else self.SUPPORTED_EXTENSIONS
+        self.embedding_model = embedding_model if embedding_model else self.EMBEDDING_MODEL
 
         # Setup logging
         self._setup_logging()
@@ -111,7 +121,7 @@ class DocumentProcessor:
 
         try:
             for file_path in self.documents_dir.rglob('*'):
-                if file_path.is_file() and file_path.suffix.lower() in self.SUPPORTED_EXTENSIONS:
+                if file_path.is_file() and file_path.suffix.lower() in self.supported_extensions:
                     documents.append({
                         'path': str(file_path),
                         'name': file_path.name,
@@ -298,7 +308,7 @@ class DocumentProcessor:
             for i, chunk in enumerate(chunks):
                 try:
                     response = ollama.embeddings(
-                        model=self.EMBEDDING_MODEL,
+                        model=self.embedding_model,
                         prompt=chunk
                     )
                     embeddings.append(response['embedding'])
@@ -314,7 +324,7 @@ class DocumentProcessor:
         except Exception as e:
             self.logger.error(f"Ollama embedding generation failed: {e}")
             self.logger.error("Make sure Ollama is running and the model is installed:")
-            self.logger.error(f"  ollama pull {self.EMBEDDING_MODEL}")
+            self.logger.error(f"  ollama pull {self.embedding_model}")
             return None
 
     def store_chunks(self, chunks: List[str], embeddings: List[List[float]],
@@ -418,7 +428,7 @@ class DocumentProcessor:
                     continue
 
                 # Chunk text
-                chunks = self.chunk_text(text)
+                chunks = self.chunk_text(text, chunk_size=self.chunk_size, overlap=self.chunk_overlap)
                 if not chunks:
                     error_msg = f"No chunks created from {file_name}"
                     self.logger.warning(error_msg)
