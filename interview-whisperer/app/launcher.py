@@ -391,7 +391,7 @@ class InterviewWhispererLauncher:
         open_btn = tk.Button(
             btn_frame,
             text="📂 Open Documents Folder",
-            command=lambda: subprocess.run(['xdg-open', str(self.docs_dir)]),
+            command=lambda: subprocess.run(['open', str(self.docs_dir)]),
             bg=self.colors['accent_blue'],
             fg=self.colors['bg_dark'],
             font=("Arial", 12, "bold"),

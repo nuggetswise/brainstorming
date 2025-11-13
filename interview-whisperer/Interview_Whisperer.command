@@ -11,12 +11,21 @@ cd "$(dirname "$0")"
 # Set up environment (first time only)
 if [ ! -d "venv" ]; then
     echo "🔧 First-time setup (this will take a minute)..."
-    python3 -m venv venv
-    source venv/bin/activate
+    /opt/homebrew/bin/python3.13 -m venv venv
+    if [ ! -d "venv" ]; then
+        echo "❌ Failed to create virtual environment"
+        exit 1
+    fi
+fi
+
+# Activate venv
+source venv/bin/activate
+
+# Install dependencies if needed
+if [ ! -f "venv/.installed" ]; then
     pip install --quiet -r requirements.txt
+    touch venv/.installed
     echo "✅ Setup complete!"
-else
-    source venv/bin/activate
 fi
 
 # Start Ollama if not running
@@ -28,7 +37,7 @@ fi
 
 # Launch GUI (no more terminal output)
 echo "🎯 Launching Interview Whisperer..."
-python app/launcher.py
+venv/bin/python app/launcher.py
 
 # Keep terminal open if there's an error
 if [ $? -ne 0 ]; then

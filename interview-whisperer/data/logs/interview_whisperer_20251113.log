@@ -18,3 +18,51 @@
 2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Whisper model: base
 2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Ollama LLM: llama3.1:8b
 2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Ollama embedding model: nomic-embed-text
+2025-11-13 15:43:34,421 - InterviewWhisperer - INFO - Interview Whisperer configuration loaded
+2025-11-13 15:43:34,421 - InterviewWhisperer - INFO - Base directory: /Users/singhm/brainstorming/interview-whisperer
+2025-11-13 15:43:34,421 - InterviewWhisperer - INFO - Whisper model: base
+2025-11-13 15:43:34,421 - InterviewWhisperer - INFO - Ollama LLM: llama3.1:8b
+2025-11-13 15:43:34,421 - InterviewWhisperer - INFO - Ollama embedding model: nomic-embed-text
+2025-11-13 15:43:49,774 - InterviewWhisperer.Copilot - INFO - InterviewCopilot initialized
+2025-11-13 15:43:54,541 - document_processor - INFO - ChromaDB initialized at /Users/singhm/brainstorming/interview-whisperer/data/chroma_db
+2025-11-13 15:44:23,174 - document_processor - INFO - Found 2 documents to process
+2025-11-13 15:44:23,212 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 15:44:23,224 - document_processor - ERROR - Failed to create embedding for chunk 0: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2025-11-13 15:44:23,224 - document_processor - ERROR - Failed to create embeddings for README.md
+2025-11-13 15:44:23,228 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 15:44:23,229 - document_processor - ERROR - Failed to create embedding for chunk 0: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2025-11-13 15:44:23,229 - document_processor - ERROR - Failed to create embeddings for sample_interview_guide.txt
+2025-11-13 15:44:23,229 - document_processor - INFO - Processing complete: 0/2 files
+2025-11-13 17:01:04,403 - document_processor - INFO - Found 2 documents to process
+2025-11-13 17:01:04,433 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 17:01:04,442 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embeddings "HTTP/1.1 404 Not Found"
+2025-11-13 17:01:04,443 - document_processor - ERROR - Failed to create embedding for chunk 0: model "nomic-embed-text" not found, try pulling it first (status code: 404)
+2025-11-13 17:01:04,443 - document_processor - ERROR - Failed to create embeddings for README.md
+2025-11-13 17:01:04,446 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 17:01:04,448 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embeddings "HTTP/1.1 404 Not Found"
+2025-11-13 17:01:04,448 - document_processor - ERROR - Failed to create embedding for chunk 0: model "nomic-embed-text" not found, try pulling it first (status code: 404)
+2025-11-13 17:01:04,448 - document_processor - ERROR - Failed to create embeddings for sample_interview_guide.txt
+2025-11-13 17:01:04,448 - document_processor - INFO - Processing complete: 0/2 files
+2025-11-13 17:02:43,273 - document_processor - INFO - Found 2 documents to process
+2025-11-13 17:02:43,301 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 17:02:48,746 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-11-13 17:02:48,752 - document_processor - INFO - Created 1 embeddings
+2025-11-13 17:02:48,785 - document_processor - INFO - Stored 1 chunks for README.md
+2025-11-13 17:02:48,785 - document_processor - INFO - ✅ Successfully processed README.md (1 chunks)
+2025-11-13 17:02:48,788 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 17:02:48,952 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embeddings "HTTP/1.1 500 Internal Server Error"
+2025-11-13 17:02:48,952 - document_processor - ERROR - Failed to create embedding for chunk 0: do embedding request: Post "http://127.0.0.1:58223/embedding": EOF (status code: 500)
+2025-11-13 17:02:48,953 - document_processor - ERROR - Failed to create embeddings for sample_interview_guide.txt
+2025-11-13 17:02:48,953 - document_processor - INFO - Processing complete: 1/2 files
+2025-11-13 17:08:50,885 - document_processor - INFO - Found 2 documents to process
+2025-11-13 17:08:50,916 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 17:08:51,430 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-11-13 17:08:51,432 - document_processor - INFO - Created 1 embeddings
+2025-11-13 17:08:51,441 - document_processor - INFO - Stored 1 chunks for README.md
+2025-11-13 17:08:51,441 - document_processor - INFO - ✅ Successfully processed README.md (1 chunks)
+2025-11-13 17:08:51,448 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 17:08:51,545 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/embeddings "HTTP/1.1 200 OK"
+2025-11-13 17:08:51,547 - document_processor - INFO - Created 1 embeddings
+2025-11-13 17:08:51,553 - document_processor - INFO - Stored 1 chunks for sample_interview_guide.txt
+2025-11-13 17:08:51,553 - document_processor - INFO - ✅ Successfully processed sample_interview_guide.txt (1 chunks)
+2025-11-13 17:08:51,553 - document_processor - INFO - Processing complete: 2/2 files
