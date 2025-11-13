@@ -1,0 +1,13 @@
+2025-11-13 00:36:04,460 - document_processor - INFO - ChromaDB initialized at ../data/chroma_db
+2025-11-13 00:36:04,461 - document_processor - INFO - Found 2 documents to process
+2025-11-13 00:36:19,343 - app.document_processor - INFO - ChromaDB initialized at data/chroma_db
+2025-11-13 00:36:19,344 - app.document_processor - INFO - Found 2 documents to process
+2025-11-13 00:36:19,345 - app.document_processor - INFO - Created 3 chunks from text
+2025-11-13 00:36:19,346 - app.document_processor - INFO - Created 7 chunks from text
+2025-11-13 00:37:45,475 - document_processor - INFO - ChromaDB initialized at ../data/chroma_db
+2025-11-13 00:37:45,491 - document_processor - INFO - Found 2 documents to process
+2025-11-13 00:37:45,492 - document_processor - INFO - Created 1 chunks from text
+2025-11-13 00:37:45,493 - document_processor - INFO - Created 3 chunks from text
+2025-11-13 00:39:05,304 - document_processor - INFO - ChromaDB initialized at ../data/chroma_db
+2025-11-13 00:39:05,306 - document_processor - INFO - Found 2 documents to process
+2025-11-13 00:39:05,307 - document_processor - INFO - Created 4 chunks from text

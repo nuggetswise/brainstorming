@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+
+    <key>CFBundleExecutable</key>
+    <string>launcher</string>
+
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+
+    <key>CFBundleIdentifier</key>
+    <string>com.interviewwhisperer.app</string>
+
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+
+    <key>CFBundleName</key>
+    <string>Interview Whisperer</string>
+
+    <key>CFBundleDisplayName</key>
+    <string>Interview Whisperer</string>
+
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+
+    <key>CFBundleVersion</key>
+    <string>1</string>
+
+    <key>LSMinimumSystemVersion</key>
+    <string>10.15</string>
+
+    <key>NSHighResolutionCapable</key>
+    <true/>
+
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Interview Whisperer needs microphone access to transcribe interview questions in real-time.</string>
+
+    <key>NSAppleEventsUsageDescription</key>
+    <string>Interview Whisperer needs to control the system to function properly.</string>
+
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.productivity</string>
+
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Documents</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>com.adobe.pdf</string>
+                <string>org.openxmlformats.wordprocessingml.document</string>
+                <string>public.plain-text</string>
+            </array>
+        </dict>
+    </array>
+
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2025 Interview Whisperer. All rights reserved.</string>
+
+    <key>LSBackgroundOnly</key>
+    <false/>
+
+    <key>LSUIElement</key>
+    <false/>
+</dict>
+</plist>

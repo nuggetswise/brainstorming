@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# Interview Whisperer - macOS Application Launcher
+# This script is executed when the .app is double-clicked
+
+# Get the directory where the app bundle is located
+APP_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+CONTENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+PROJECT_DIR="$APP_DIR"
+
+# Change to project directory
+cd "$PROJECT_DIR" || exit 1
+
+# Function to show error dialog
+show_error() {
+    osascript -e "display dialog \"$1\" with title \"Interview Whisperer\" buttons {\"OK\"} default button \"OK\" with icon stop"
+}
+
+# Function to show notification
+show_notification() {
+    osascript -e "display notification \"$1\" with title \"Interview Whisperer\""
+}
+
+# Check if Python 3 is installed
+if ! command -v python3 &> /dev/null; then
+    show_error "Python 3 is required but not installed.
+
+Please install Python 3.10 or later from:
+https://www.python.org/downloads/"
+    exit 1
+fi
+
+# Check Python version
+PYTHON_VERSION=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+REQUIRED_VERSION="3.10"
+
+if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$PYTHON_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
+    show_error "Python 3.10+ required. Current version: $PYTHON_VERSION
+
+Please upgrade Python from:
+https://www.python.org/downloads/"
+    exit 1
+fi
+
+# Show startup notification
+show_notification "Starting Interview Whisperer..."
+
+# Set up virtual environment (first time only)
+if [ ! -d "venv" ]; then
+    show_notification "First-time setup in progress..."
+
+    # Create virtual environment
+    python3 -m venv venv || {
+        show_error "Failed to create virtual environment.
+
+Please check that Python is properly installed."
+        exit 1
+    }
+
+    # Activate and install dependencies
+    source venv/bin/activate
+
+    # Upgrade pip quietly
+    pip install --quiet --upgrade pip
+
+    # Install requirements
+    if [ -f "requirements.txt" ]; then
+        pip install --quiet -r requirements.txt || {
+            show_error "Failed to install dependencies.
+
+Check your internet connection and try again."
+            exit 1
+        }
+    fi
+
+    show_notification "Setup complete!"
+else
+    # Activate existing venv
+    source venv/bin/activate
+fi
+
+# Check if Ollama is installed
+if command -v ollama &> /dev/null; then
+    # Check if Ollama is running
+    if ! curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+        show_notification "Starting Ollama..."
+
+        # Start Ollama in background
+        ollama serve > /dev/null 2>&1 &
+
+        # Wait for Ollama to start
+        for i in {1..10}; do
+            if curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+                break
+            fi
+            sleep 1
+        done
+    fi
+else
+    # Ollama not installed - show warning but continue
+    osascript -e 'display dialog "Ollama is not installed. Some features will not work.
+
+Install from: https://ollama.ai
+
+The app will open, but you need Ollama for full functionality." with title "Interview Whisperer" buttons {"Continue Anyway"} default button "Continue Anyway" with icon caution' > /dev/null 2>&1
+fi
+
+# Launch the GUI
+if [ -f "app/launcher.py" ]; then
+    # Run in foreground so app stays open
+    python app/launcher.py
+
+    EXIT_CODE=$?
+
+    # If there was an error, show it
+    if [ $EXIT_CODE -ne 0 ]; then
+        show_error "Application exited with an error.
+
+Check the logs in data/logs/ for details."
+    fi
+else
+    show_error "Application files not found.
+
+Please reinstall Interview Whisperer."
+    exit 1
+fi
+
+# Cleanup on exit
+exit 0

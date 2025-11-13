@@ -1,0 +1,20 @@
+2025-11-13 00:32:16,430 - InterviewWhisperer - INFO - Interview Whisperer configuration loaded
+2025-11-13 00:32:16,430 - InterviewWhisperer - INFO - Base directory: /home/user/interview-whisperer
+2025-11-13 00:32:16,430 - InterviewWhisperer - INFO - Whisper model: base
+2025-11-13 00:32:16,430 - InterviewWhisperer - INFO - Ollama LLM: llama3.1:8b
+2025-11-13 00:32:16,431 - InterviewWhisperer - INFO - Ollama embedding model: nomic-embed-text
+2025-11-13 00:44:47,686 - InterviewWhisperer - INFO - Interview Whisperer configuration loaded
+2025-11-13 00:44:47,686 - InterviewWhisperer - INFO - Base directory: /home/user/interview-whisperer
+2025-11-13 00:44:47,686 - InterviewWhisperer - INFO - Whisper model: base
+2025-11-13 00:44:47,686 - InterviewWhisperer - INFO - Ollama LLM: llama3.1:8b
+2025-11-13 00:44:47,687 - InterviewWhisperer - INFO - Ollama embedding model: nomic-embed-text
+2025-11-13 00:48:37,022 - InterviewWhisperer - INFO - Interview Whisperer configuration loaded
+2025-11-13 00:48:37,022 - InterviewWhisperer - INFO - Base directory: /home/user/interview-whisperer
+2025-11-13 00:48:37,022 - InterviewWhisperer - INFO - Whisper model: base
+2025-11-13 00:48:37,022 - InterviewWhisperer - INFO - Ollama LLM: llama3.1:8b
+2025-11-13 00:48:37,022 - InterviewWhisperer - INFO - Ollama embedding model: nomic-embed-text
+2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Interview Whisperer configuration loaded
+2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Base directory: /home/user/interview-whisperer
+2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Whisper model: base
+2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Ollama LLM: llama3.1:8b
+2025-11-13 01:00:48,542 - InterviewWhisperer - INFO - Ollama embedding model: nomic-embed-text
