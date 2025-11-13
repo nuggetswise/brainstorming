@@ -1,0 +1,88 @@
+Product Manager Interview Guide
+
+INTRODUCTION
+Product management is a multifaceted role that requires a unique blend of technical knowledge, business acumen, and interpersonal skills. This guide covers essential topics for PM interviews.
+
+CORE COMPETENCIES
+
+1. Product Strategy
+A great product manager must be able to define and articulate a clear product vision. This involves understanding market dynamics, customer needs, and competitive positioning. Strategic thinking requires balancing short-term wins with long-term goals.
+
+2. Customer Discovery
+Understanding customer pain points is fundamental. Use techniques like user interviews, surveys, and data analysis to gather insights. The Jobs-to-be-Done framework helps identify what customers are trying to accomplish.
+
+3. Prioritization Frameworks
+Common frameworks include:
+- RICE (Reach, Impact, Confidence, Effort)
+- ICE (Impact, Confidence, Ease)
+- Value vs. Effort Matrix
+- Kano Model
+
+Each framework has strengths depending on the context and available data.
+
+4. Metrics and Analytics
+Define success metrics early. Distinguish between:
+- North Star Metrics: Overall product health
+- Leading Indicators: Predict future performance
+- Lagging Indicators: Measure past performance
+
+Common metrics include DAU/MAU, retention rate, NPS, conversion rate, and CLTV.
+
+5. Stakeholder Management
+Effective PMs communicate clearly with:
+- Engineering teams (technical requirements, trade-offs)
+- Design teams (user experience goals)
+- Sales and marketing (value propositions)
+- Leadership (strategic alignment, ROI)
+
+Build trust through transparency and consistent delivery.
+
+INTERVIEW QUESTION TYPES
+
+Product Design Questions
+Example: "Design a product for busy parents to plan meals."
+Approach: Clarify constraints, identify users, define problems, brainstorm solutions, prioritize features.
+
+Estimation Questions
+Example: "How many gas stations are in the United States?"
+Approach: Break down the problem, make reasonable assumptions, show your math.
+
+Behavioral Questions
+Example: "Tell me about a time you disagreed with engineering."
+Approach: Use STAR format (Situation, Task, Action, Result).
+
+Strategy Questions
+Example: "Should Facebook enter the dating market?"
+Approach: Analyze market, assess capabilities, consider risks, make recommendation.
+
+PREPARATION TIPS
+
+1. Practice Structured Thinking
+Use frameworks to organize your thoughts. Don't jump to solutions immediately.
+
+2. Ask Clarifying Questions
+Never assume. Understand the problem space before proposing solutions.
+
+3. Think Out Loud
+Interviewers want to understand your thought process. Verbalize your reasoning.
+
+4. Use Real Examples
+Draw from actual experience when possible. Be specific about your contributions.
+
+5. Prepare Questions
+Have thoughtful questions ready about the company, role, and team.
+
+COMMON MISTAKES TO AVOID
+
+- Focusing only on features without considering business value
+- Ignoring technical constraints or feasibility
+- Not quantifying impact or success metrics
+- Failing to consider competitive dynamics
+- Being too generic instead of specific
+- Not admitting when you don't know something
+
+CONCLUSION
+
+Product management interviews assess your ability to think strategically, communicate effectively, and make data-driven decisions. Practice consistently, learn from feedback, and stay curious about products and customers.
+
+Remember: Great PMs are customer advocates, team enablers, and business drivers all at once.
