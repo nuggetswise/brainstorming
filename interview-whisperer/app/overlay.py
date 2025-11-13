@@ -55,16 +55,30 @@ class OverlayWindow:
     - Thread-safe updates
     """
 
-    def __init__(self, width: int = 400, height: int = 350):
+    def __init__(self, width: int = 400, height: int = 350, transparency: float = 0.95,
+                 position: str = "top-right", font_size: int = 10, always_on_top: bool = True,
+                 show_confidence: bool = True, show_sources: bool = True):
         """
         Initialize the overlay window.
 
         Args:
             width: Window width in pixels
             height: Window height in pixels
+            transparency: Window transparency (0.0-1.0)
+            position: Window position (top-right, top-left, bottom-right, bottom-left, center)
+            font_size: Base font size
+            always_on_top: Keep window always on top
+            show_confidence: Display confidence scores
+            show_sources: Display source documents
         """
         self.width = width
         self.height = height
+        self.transparency = transparency
+        self.position_pref = position
+        self.font_size_base = font_size
+        self.always_on_top = always_on_top
+        self.show_confidence = show_confidence
+        self.show_sources = show_sources
         self.colors = Colors()
         self.is_visible = True
         self.animation_id = None
@@ -93,10 +107,11 @@ class OverlayWindow:
     def _configure_window(self):
         """Configure window properties (transparency, always on top, etc.)"""
         # Always on top
-        self.window.attributes('-topmost', True)
+        if self.always_on_top:
+            self.window.attributes('-topmost', True)
 
-        # Transparency (95% opaque)
-        self.window.attributes('-alpha', 0.95)
+        # Transparency (configurable)
+        self.window.attributes('-alpha', self.transparency)
 
         # Remove window decorations (optional - comment out if you want title bar)
         self.window.overrideredirect(True)
@@ -378,13 +393,32 @@ class OverlayWindow:
         self.window.bind("<Escape>", lambda e: self.clear())
 
     def _position_window(self):
-        """Position window at top-right corner of screen"""
+        """Position window based on position preference"""
         screen_width = self.window.winfo_screenwidth()
         screen_height = self.window.winfo_screenheight()
 
-        # Top-right corner with some padding
-        x = screen_width - self.width - 20
-        y = 20
+        padding = 20
+
+        # Calculate position based on preference
+        if self.position_pref == "top-right":
+            x = screen_width - self.width - padding
+            y = padding
+        elif self.position_pref == "top-left":
+            x = padding
+            y = padding
+        elif self.position_pref == "bottom-right":
+            x = screen_width - self.width - padding
+            y = screen_height - self.height - padding
+        elif self.position_pref == "bottom-left":
+            x = padding
+            y = screen_height - self.height - padding
+        elif self.position_pref == "center":
+            x = (screen_width - self.width) // 2
+            y = (screen_height - self.height) // 2
+        else:
+            # Default to top-right
+            x = screen_width - self.width - padding
+            y = padding
 
         self.window.geometry(f"{self.width}x{self.height}+{x}+{y}")
 

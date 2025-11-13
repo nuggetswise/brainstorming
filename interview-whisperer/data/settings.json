@@ -1,0 +1,40 @@
+{
+  "audio": {
+    "whisper_model": "base",
+    "sample_rate": 16000,
+    "channels": 1,
+    "chunk_duration": 5.0,
+    "silence_threshold": 0.02,
+    "silence_duration": 1.5,
+    "context_duration": 30.0
+  },
+  "display": {
+    "width": 500,
+    "height": 350,
+    "transparency": 0.95,
+    "position": "top-right",
+    "font_size": 10,
+    "always_on_top": true,
+    "show_confidence": true,
+    "show_sources": true
+  },
+  "document": {
+    "chunk_size": 500,
+    "chunk_overlap": 50,
+    "supported_extensions": [
+      ".pdf",
+      ".docx",
+      ".txt",
+      ".md"
+    ],
+    "auto_process": false
+  },
+  "llm": {
+    "ollama_llm_model": "llama3.1:8b",
+    "ollama_embed_model": "nomic-embed-text",
+    "ollama_host": "http://localhost:11434",
+    "temperature": 0.7,
+    "max_tokens": 250,
+    "n_results": 3
+  }
+}
